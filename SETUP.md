@@ -68,7 +68,7 @@ DATABASE_SYNCHRONIZE=false
 ```
 (Altere a porta e a palavra-passe conforme a configuração do seu MySQL).
 
-🎨 Passo 4: Forjando o Frontend (React)
+##🎨 Passo 4: Forjando o Frontend (React)
 Volte à pasta principal para criar a interface visual utilizando Vite e TypeScript:
 
 ```Bash
@@ -85,7 +85,7 @@ npm install
 npm install axios react-router-dom
 ```
 
-🚀 Passo 5: O Elo de Ligação (Git e GitHub)
+##🚀 Passo 5: O Elo de Ligação (Git e GitHub)
 Com as pastas do frontend e backend prontas, vamos transformar a pasta principal num repositório e enviar tudo para a nuvem.
 
 Volte para a pasta raiz (agm-sistema):
@@ -111,7 +111,7 @@ git remote add origin [https://github.com/SEU_USUARIO/agm-sistema.git](https://g
 git push -u origin main
 ```
 
-✅ Como Executar o Projeto no Dia a Dia
+##✅ Como Executar o Projeto no Dia a Dia
 Para ligar o Servidor (Backend):
 
 ```Bash
