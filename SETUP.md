@@ -36,3 +36,100 @@ Abra o terminal na sua máquina (na Área de Trabalho ou pasta da sua preferênc
 ```bash
 mkdir agm-sistema
 cd agm-sistema
+```
+
+## ⚙️ Passo 3: Forjando o Backend (NestJS)
+Ainda no terminal, dentro da pasta agm-sistema, vamos gerar a API do servidor:
+
+```Bash
+
+npx @nestjs/cli new agm_backend
+(Escolha npm quando o terminal perguntar qual o gestor de pacotes a utilizar).
+```
+Entre na pasta do backend e instale as ferramentas necessárias para ligar à base de dados:
+
+```Bash
+
+cd agm_backend
+npm install @nestjs/typeorm typeorm mysql2 dotenv @nestjs/config
+```
+Crie um ficheiro chamado .env na raiz da pasta agm_backend com as seguintes credenciais:
+
+```Plaintext
+
+PORT=8000
+DATABASE_TYPE='mysql'
+DATABASE_HOST='localhost'
+DATABASE_PORT=3307
+DATABASE_USERNAME='root'
+DATABASE_PASSWORD=''
+DATABASE_DATABASE='agm_db'
+DATABASE_SYNCHRONIZE=false
+```
+(Altere a porta e a palavra-passe conforme a configuração do seu MySQL).
+
+🎨 Passo 4: Forjando o Frontend (React)
+Volte à pasta principal para criar a interface visual utilizando Vite e TypeScript:
+
+```Bash
+
+cd ..
+npm create vite@latest agm_frontend -- --template react-ts
+```
+Entre na pasta do frontend e instale as dependências básicas:
+
+```Bash
+
+cd agm_frontend
+npm install
+npm install axios react-router-dom
+```
+
+🚀 Passo 5: O Elo de Ligação (Git e GitHub)
+Com as pastas do frontend e backend prontas, vamos transformar a pasta principal num repositório e enviar tudo para a nuvem.
+
+Volte para a pasta raiz (agm-sistema):
+
+```Bash
+
+cd ..
+Execute os comandos abaixo pela exata ordem para inicializar o Git e enviar os ficheiros:
+
+Bash
+
+git init
+git add .
+git commit -m "Setup inicial: Backend NestJS e Frontend React do sistema AGM"
+git branch -M main
+```
+
+Agora, adicione o link do repositório vazio que criou no Passo 1 e empurre o código (substitua pelo seu link):
+
+```Bash
+
+git remote add origin [https://github.com/SEU_USUARIO/agm-sistema.git](https://github.com/SEU_USUARIO/agm-sistema.git)
+git push -u origin main
+```
+
+✅ Como Executar o Projeto no Dia a Dia
+Para ligar o Servidor (Backend):
+
+```Bash
+
+cd agm_backend
+npm run start:dev
+```
+
+O terminal indicará que a API está a correr na porta 8000.
+
+Para ligar a Interface (Frontend):
+Abra um novo terminal e execute:
+
+```Bash
+
+cd agm_frontend
+npm run dev
+```
+O terminal fornecerá o link (geralmente http://localhost:5173) para aceder ao sistema.
+
+
