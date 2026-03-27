@@ -53,11 +53,73 @@ DATABASE_NAME=agm_db
 ### 1. Setor (setor) 
 #### Entidade responsável por mapear as áreas físicas da fazenda.
 
+| Coluna | Tipo | Descrição |
+| :--- | :--- | :--- |
+| **id** | `INT (PK)` | Identificador único (Auto-incremento) |
+| **codSetor** | `VARCHAR` | Código alfanumérico de identificação (ex: S03) |
+| **nomeSetor** | `VARCHAR` | Nome descritivo da área (ex: Setor Leste) |
+
+## 🔌 Documentação da API (Endpoints)
+### Base URL: http://localhost:8080
+#### (CORS habilitado para aceitar requisições do frontend)
+
+Módulo: Setores (/setor)
+GET /setor
+
+Retorna: Um array (lista) de todos os setores registados.
+
+POST /setor
+
+Corpo (JSON): { "codSetor": "S01", "nomeSetor": "Setor Norte" }
+
+Ação: Cria um novo setor na base de dados.
+
+PATCH /setor/:id
+
+Parâmetro: ID do setor na URL.
+
+Corpo (JSON): Dados a serem atualizados.
+
+Ação: Atualiza as informações de um setor existente.
+
+DELETE /setor/:id
+
+Parâmetro: ID do setor na URL.
+
+Ação: Remove o setor permanentemente da base de dados.
+
+## 🧩 Estrutura do Frontend
+### O frontend foi componentizado para facilitar a manutenção e a navegação através de rotas dinâmicas (Single Page Application).
+
 ```
-    Coluna,          Tipo,          Descrição
-    
-    id,              INT (PK),      Identificador único (Auto-incremento)
-    codSetor,        VARCHAR,       Código alfanumérico de identificação (ex: S03)
-    nomeSetor,       VARCHAR,       Nome descritivo da área (ex: Setor Leste)
+agm_frontend/src/
+ ├── App.tsx             # Layout principal (Sidebar, Navegação e Roteador)
+ ├── main.tsx            # Ponto de entrada do React
+ │
+ ├── pages/              # Módulos de Tela (Views)
+ │    ├── Setores.tsx      # CRUD completo da entidade Setor
+ │    └── Funcionarios.tsx # View provisória (Próxima implementação)
+ │
+ └── services/           # Regras de Comunicação Externa
+      └── api.ts         # Instância global do Axios configurada com a Base URL
 ```
 
+## 🚀 Como Executar o Projeto Localmente
+
+### 1.Inicie o Banco de Dados: Garanta que o serviço MySQL está ativo na porta 8000 (via XAMPP ou outro gerenciador).
+
+### 2.Inicie o Backend:
+```
+cd agm_backend
+npm install
+npm run start:dev
+```
+
+### 3. Inicie o Frontend:
+```
+cd agm_frontend
+npm install
+npm run dev
+```
+
+### 4. Acesse: Abra http://localhost:5173 no seu navegador.

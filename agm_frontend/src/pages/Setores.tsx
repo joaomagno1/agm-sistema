@@ -125,7 +125,7 @@ function Setores() {
             <th>ID</th>
             <th>Código</th>
             <th>Nome do Setor</th>
-            <th>Ações</th> {/* <-- ADICIONE ESTA LINHA AQUI */}
+            <th>Ações</th>
           </tr>
         </thead>
         <tbody>
