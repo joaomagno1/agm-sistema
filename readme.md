@@ -106,9 +106,9 @@ agm_frontend/src/
 
 ## 🚀 Como Executar o Projeto Localmente
 
-### 1.Inicie o Banco de Dados: Garanta que o serviço MySQL está ativo na porta 8000 (via XAMPP ou outro gerenciador).
+### 1. Inicie o Banco de Dados: Garanta que o serviço MySQL está ativo na porta 8000 (via XAMPP ou outro gerenciador).
 
-### 2.Inicie o Backend:
+### 2. Inicie o Backend:
 ```
 cd agm_backend
 npm install
