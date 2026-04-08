@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { SetorModule } from './setor/setor.module'; // O CLI adicionou isso automaticamente
+import { FuncionarioModule } from './funcionario/funcionario.module';
 
 @Module({
   imports: [
@@ -30,6 +31,8 @@ import { SetorModule } from './setor/setor.module'; // O CLI adicionou isso auto
     }),
     
     SetorModule,
+    
+    FuncionarioModule,
   ],
   controllers: [AppController],
   providers: [AppService],
