@@ -40,12 +40,14 @@ Para evitar conflitos de rede, o ecossistema AGM está configurado com o seguint
 
 ### `.env` do Backend (`agm_backend/.env`)
 ```env
-PORT=8080
-DATABASE_HOST=localhost
-DATABASE_PORT=8000
-DATABASE_USER=root
-DATABASE_PASSWORD=
-DATABASE_NAME=agm_db
+PORT=8000
+DATABASE_TYPE='mysql'
+DATABASE_HOST='localhost'
+DATABASE_PORT=8081
+DATABASE_USERNAME='root'
+DATABASE_PASSWORD=''
+DATABASE_DATABASE='agm_db'
+DATABASE_SYNCHRONIZE=false
 ```
 
 ## 🗄️ Entidades e Banco de Dados
