@@ -60,7 +60,7 @@ Crie um ficheiro chamado .env na raiz da pasta agm_backend com as seguintes cred
 PORT=8000
 DATABASE_TYPE='mysql'
 DATABASE_HOST='localhost'
-DATABASE_PORT=3307
+DATABASE_PORT=8081
 DATABASE_USERNAME='root'
 DATABASE_PASSWORD=''
 DATABASE_DATABASE='agm_db'
@@ -77,7 +77,7 @@ cd ..
 npm create vite@latest agm_frontend -- --template react-ts
 ```
 Entre na pasta do frontend e instale as dependências básicas:
-
+clear
 ```Bash
 
 cd agm_frontend
