@@ -19,4 +19,13 @@ export class Usuario {
 
   @Column()
   password!: string;
+
+  @Column({ type: 'boolean', default: false })
+  status_validacao!: boolean;
+
+  @Column({ type: 'varchar', length: 255, nullable: true })
+  recovery_token!: string | null;
+
+  @Column({ type: 'datetime', nullable: true })
+  token_expires!: Date | null;
 }

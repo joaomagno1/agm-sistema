@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Get, Post, Body, UseGuards, Param } from '@nestjs/common';
 import { UsuarioService } from './usuario.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 
@@ -13,9 +13,9 @@ export class UsuarioController {
     return this.usuarioService.create(createUsuarioDto);
   }
 
-  @Get() // Responde a pedidos de CONSULTA
-  findAll() {
-    // Pede ao Service para buscar todos
-    return this.usuarioService.findAll();
+  @UseGuards(AuthGuard('jwt'))
+  @Get('validar/:token') // A rota será: http://localhost:8080/usuario/validar/TOKEN_AQUI
+  validarEmail(@Param('token') token: string) {
+    return this.usuarioService.validarEmail(token);
   }
 }
