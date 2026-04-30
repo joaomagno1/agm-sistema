@@ -6,6 +6,8 @@ import { AppService } from './app.service';
 import { SetorModule } from './setor/setor.module'; // O CLI adicionou isso automaticamente
 import { FuncionarioModule } from './funcionario/funcionario.module';
 import { UsuarioModule } from './usuario/usuario.module';
+import { AuthModule } from './auth/auth.module';
+import { MailModule } from './mail/mail.module';
 
 @Module({
   imports: [
@@ -36,6 +38,10 @@ import { UsuarioModule } from './usuario/usuario.module';
     FuncionarioModule,
     
     UsuarioModule,
+    
+    AuthModule,
+    
+    MailModule,
   ],
   controllers: [AppController],
   providers: [AppService],
