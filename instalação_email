@@ -1,0 +1,4 @@
+npm install @nestjs/jwt @nestjs/passport passport passport-jwt --legacy-peer-deps
+npm install -D @types/passport-jwt --legacy-peer-deps
+npm install nodemailer --legacy-peer-deps
+npm install -D @types/nodemailer --legacy-peer-deps
