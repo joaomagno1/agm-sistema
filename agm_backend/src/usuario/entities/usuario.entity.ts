@@ -30,6 +30,9 @@ export class Usuario {
   @Column({ name: 'RECOVERY_TOKEN', type: 'varchar', length: 255, nullable: true })
   recoveryToken: string | null;
 
+  @Column({ name: 'REFRESH_TOKEN', type: 'varchar', length: 255, nullable: true })
+  refreshToken: string | null;
+
   @Column({ name: 'TOKEN_EXPIRES', type: 'datetime', nullable: true })
   tokenExpires: Date | null;
 

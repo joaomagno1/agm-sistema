@@ -44,7 +44,7 @@ export class UsuarioService {
       statusValidacao: false,
       recoveryToken: tokenValidacao,
       tokenExpires: expiracao,
-      setor: { idSetor: createUsuarioDto.id_setor } as any,
+      setor: { id: createUsuarioDto.id_setor } as any,
     });
 
     const usuarioSalvo = await this.usuarioRepository.save(novoUsuario);

@@ -5,7 +5,7 @@ import api from '../services/api';
 
 export function CadastroUsuario() {
   const [form, setForm] = useState({ codUsuario: '', nomeUsuario: '', email: '', senha: '', id_setor: 0 });
-  const [setores, setSetores] = useState<{ idSetor: number; codSetor: string; nomeSetor: string }[]>([]);
+  const [setores, setSetores] = useState<{ id: number; codSetor: string; nomeSetor: string }[]>([]);
   const [mensagem, setMensagem] = useState('');
   const [erro, setErro] = useState('');
   const [loading, setLoading] = useState(false);
@@ -99,7 +99,7 @@ export function CadastroUsuario() {
                   className="w-full pl-10 pr-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-agm-500 focus:border-agm-500 outline-none transition bg-white appearance-none">
                   <option value={0}>Selecione um setor</option>
                   {setores.map((s) => (
-                    <option key={s.idSetor} value={s.idSetor}>{s.codSetor} - {s.nomeSetor}</option>
+                    <option key={s.id} value={s.id}>{s.codSetor} - {s.nomeSetor}</option>
                   ))}
                 </select>
               </div>

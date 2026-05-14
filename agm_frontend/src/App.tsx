@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Link, Navigate, useLocation } from 'react-router-dom';
-import { LayoutDashboard, Users, Star, Sprout, Package, UserCircle, LogOut, LogIn, Leaf } from 'lucide-react';
+import { LayoutDashboard, Users, Star, Sprout, Package, UserCircle, LogOut, LogIn, Leaf, Loader2 } from 'lucide-react';
 import Setores from './pages/Setores';
 import Funcionarios from './pages/Funcionarios';
 import { Usuarios } from './pages/Usuario';
@@ -21,8 +21,11 @@ const navItems = [
   { path: '/usuarios', label: 'Usuários', icon: UserCircle },
 ];
 
+const TIPO_GERENTE = 1;
+
 function PrivateRoute({ children }: { children: React.ReactElement }) {
-  const { token } = useAuth();
+  const { token, loading } = useAuth();
+  if (loading) return <div className="min-h-screen flex items-center justify-center"><Loader2 className="animate-spin text-agm-600" size={32} /></div>;
   return token ? children : <Navigate to="/login" />;
 }
 
@@ -37,9 +40,20 @@ function App() {
 }
 
 function AppContent() {
-  const { token, usuario, logout } = useAuth();
+  const { token, usuario, loading, logout } = useAuth();
   const location = useLocation();
   const isPublicPage = ['/login', '/cadastrar-usuario', '/validar-email'].includes(location.pathname);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <Loader2 className="animate-spin text-agm-600 mx-auto" size={32} />
+          <p className="text-gray-500 text-sm mt-3">Carregando...</p>
+        </div>
+      </div>
+    );
+  }
 
   if (isPublicPage) {
     return (
@@ -67,6 +81,9 @@ function AppContent() {
           <div className="mx-4 mt-4 p-3 bg-agm-800/50 rounded-lg text-sm">
             <p className="text-agm-200 text-xs">Conectado como</p>
             <p className="font-medium text-white truncate">{usuario.nome}</p>
+            <span className={`inline-block mt-1 text-[10px] px-1.5 py-0.5 rounded-full font-medium ${usuario.tipo === TIPO_GERENTE ? 'bg-amber-500/20 text-amber-300' : 'bg-blue-500/20 text-blue-300'}`}>
+              {usuario.tipo === TIPO_GERENTE ? 'Gerente' : 'Funcionário'}
+            </span>
           </div>
         )}
 
