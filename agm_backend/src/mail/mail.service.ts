@@ -6,14 +6,13 @@ export class MailService {
   private transporter: nodemailer.Transporter;
 
   constructor() {
-    // Configuração do carteiro (SMTP). 
-    // Nota tática: Substitua pelos dados do seu Mailtrap ou Gmail.
     this.transporter = nodemailer.createTransport({
-      host: 'sandbox.smtp.mailtrap.io', // Exemplo do Mailtrap
-      port: 2525,
+      host: process.env.EMAIL_HOST || 'sandbox.smtp.mailtrap.io',
+      port: parseInt(process.env.EMAIL_PORT as string, 10) || 2525,
+      secure: process.env.EMAIL_SECURE === 'true',
       auth: {
-        user: 'SEU_USUARIO_AQUI', // Troque pela sua credencial do Mailtrap
-        pass: 'SUA_SENHA_AQUI',   // Troque pela sua credencial do Mailtrap
+        user: process.env.EMAIL_USER || 'SEU_USUARIO_AQUI',
+        pass: process.env.EMAIL_PASS || 'SUA_SENHA_AQUI',
       },
     });
   }
@@ -22,7 +21,7 @@ export class MailService {
     const linkConfirmacao = `http://localhost:5173/validar-email?token=${token}`; // O porto do seu React
 
     const mailOptions = {
-      from: '"Império AGM" <noreply@agm.com>',
+      from: `"Império AGM" <${process.env.EMAIL_USER}>`,
       to: email,
       subject: '🛡️ Convoque-se: Valide o seu e-mail no Império AGM!',
       html: `

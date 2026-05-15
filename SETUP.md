@@ -12,7 +12,7 @@ Passo a passo para configurar o Sistema AGM desde o zero.
 
 ## 1. Banco de Dados
 
-1. Conecte ao MySQL local (porta `3306`, `8081` ou a configurada).
+1. Conecte ao MySQL local (porta `3306` ou a configurada).
 2. Crie a base de dados:
    ```sql
    CREATE DATABASE agm_db;
@@ -36,7 +36,7 @@ Crie o arquivo `agm_backend/.env`:
 PORT=8000
 DATABASE_TYPE='mysql'
 DATABASE_HOST='localhost'
-DATABASE_PORT=8081
+DATABASE_PORT=3306
 DATABASE_USERNAME='root'
 DATABASE_PASSWORD=''
 DATABASE_DATABASE='agm_db'
@@ -83,7 +83,7 @@ A interface estará em http://localhost:5173.
 
 | Perfil | E-mail | Senha |
 |--------|--------|-------|
-| Gerente | carlos@agm.com | 123456 |
+| Gerente | joao27012006@gmail.com | 123456 |
 | Funcionário | ana@agm.com | 123456 |
 
 ---
@@ -126,6 +126,6 @@ agm-sistema/
 
 | Serviço | Porta |
 |---------|-------|
-| MySQL | 8081 |
+| MySQL | 3306 |
 | Backend API | 8000 |
 | Frontend | 5173 |

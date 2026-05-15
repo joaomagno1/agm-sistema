@@ -30,7 +30,7 @@ Plataforma web full-stack para gestão de operações agropecuárias. Permite o 
 
 | Serviço | Porta | Descrição |
 |---------|-------|-----------|
-| MySQL | `8081` | Banco de dados |
+| MySQL | `3306` | Banco de dados |
 | NestJS API | `8000` | Backend |
 | React Vite | `5173` | Frontend |
 
@@ -235,9 +235,9 @@ agm_frontend/src/
 ## Como Executar
 
 ### 1. Banco de Dados
-Garanta MySQL ativo (porta 8081) e execute o script SQL:
+Garanta MySQL ativo e execute o script SQL:
 ```bash
-mysql -u root -P 8081 -h 127.0.0.1 < agm_db/criacao_banco.sql
+mysql -u root < agm_db/criacao_banco.sql
 ```
 
 ### 2. Backend
@@ -260,5 +260,5 @@ Abra **http://localhost:5173** no navegador.
 ## Credenciais de Teste
 | Perfil | E-mail | Senha |
 |--------|--------|-------|
-| Gerente | carlos@agm.com | 123456 |
+| Gerente | joao27012006@gmail.com | 123456 |
 | Funcionário | ana@agm.com | 123456 |
