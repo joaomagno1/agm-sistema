@@ -1,4 +1,11 @@
-import { IsString, IsEmail, IsNotEmpty, Matches, IsOptional, IsNumber } from 'class-validator';
+import {
+  IsString,
+  IsEmail,
+  IsNotEmpty,
+  Matches,
+  IsOptional,
+  IsNumber,
+} from 'class-validator';
 
 export class CreateUsuarioDto {
   @IsString()
@@ -14,7 +21,8 @@ export class CreateUsuarioDto {
 
   @IsString()
   @Matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/, {
-    message: 'A senha deve ter 8+ caracteres, com maiúsculas, minúsculas e números.',
+    message:
+      'A senha deve ter 8+ caracteres, com maiúsculas, minúsculas e números.',
   })
   senha: string;
 

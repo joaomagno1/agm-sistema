@@ -47,7 +47,9 @@ export class AuthService {
     }
 
     if (!usuario.statusValidacao) {
-      throw new UnauthorizedException('Acesso negado! Confirme o seu e-mail antes de entrar.');
+      throw new UnauthorizedException(
+        'Acesso negado! Confirme o seu e-mail antes de entrar.',
+      );
     }
 
     const tokens = await this.gerarTokens(usuario);
@@ -77,7 +79,16 @@ export class AuthService {
 
     const usuario = await this.usuarioRepository.findOne({
       where: { idUsuario: usuarioId },
-      select: ['idUsuario', 'refreshToken', 'email', 'nomeUsuario', 'tipo', 'codUsuario', 'statusValidacao', 'senha'],
+      select: [
+        'idUsuario',
+        'refreshToken',
+        'email',
+        'nomeUsuario',
+        'tipo',
+        'codUsuario',
+        'statusValidacao',
+        'senha',
+      ],
     });
 
     if (!usuario || !usuario.refreshToken) {

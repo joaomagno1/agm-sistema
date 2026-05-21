@@ -1,4 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  JoinColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import { LoteCultivo } from '../../lote-cultivo/entities/lote-cultivo.entity';
 import { Funcionario } from '../../funcionario/entities/funcionario.entity';
 

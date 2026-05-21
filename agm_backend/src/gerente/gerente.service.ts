@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Gerente } from './entities/gerente.entity';
+import { Usuario } from '../usuario/entities/usuario.entity';
 import { CreateGerenteDto } from './dto/create-gerente.dto';
 import { UpdateGerenteDto } from './dto/update-gerente.dto';
 
@@ -16,7 +17,7 @@ export class GerenteService {
     const gerente = this.gerenteRepository.create({
       codGerente: createGerenteDto.codGerente,
       nomeGerente: createGerenteDto.nomeGerente,
-      usuario: { idUsuario: createGerenteDto.idUsuario } as any,
+      usuario: { idUsuario: createGerenteDto.idUsuario } as unknown as Usuario,
     });
     return this.gerenteRepository.save(gerente);
   }
@@ -36,9 +37,14 @@ export class GerenteService {
 
   async update(id: number, updateGerenteDto: UpdateGerenteDto) {
     const gerente = await this.findOne(id);
-    if (updateGerenteDto.codGerente) gerente.codGerente = updateGerenteDto.codGerente;
-    if (updateGerenteDto.nomeGerente) gerente.nomeGerente = updateGerenteDto.nomeGerente;
-    if (updateGerenteDto.idUsuario) gerente.usuario = { idUsuario: updateGerenteDto.idUsuario } as any;
+    if (updateGerenteDto.codGerente)
+      gerente.codGerente = updateGerenteDto.codGerente;
+    if (updateGerenteDto.nomeGerente)
+      gerente.nomeGerente = updateGerenteDto.nomeGerente;
+    if (updateGerenteDto.idUsuario)
+      gerente.usuario = {
+        idUsuario: updateGerenteDto.idUsuario,
+      } as unknown as Usuario;
     return this.gerenteRepository.save(gerente);
   }
 

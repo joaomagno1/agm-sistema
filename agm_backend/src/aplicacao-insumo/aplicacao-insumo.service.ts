@@ -2,6 +2,8 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { AplicacaoInsumo } from './entities/aplicacao-insumo.entity';
+import { Funcionario } from '../funcionario/entities/funcionario.entity';
+import { Insumo } from '../insumo/entities/insumo.entity';
 import { CreateAplicacaoInsumoDto } from './dto/create-aplicacao-insumo.dto';
 import { UpdateAplicacaoInsumoDto } from './dto/update-aplicacao-insumo.dto';
 
@@ -14,15 +16,17 @@ export class AplicacaoInsumoService {
 
   async create(createDto: CreateAplicacaoInsumoDto) {
     const aplicacao = this.aplicacaoRepository.create({
-      funcionario: { idFuncionario: createDto.funcionarioId } as any,
-      insumo: { idInsumo: createDto.insumoId } as any,
+      funcionario: { id: createDto.funcionarioId } as unknown as Funcionario,
+      insumo: { idInsumo: createDto.insumoId } as unknown as Insumo,
       quantidade: createDto.quantidade,
     });
     return this.aplicacaoRepository.save(aplicacao);
   }
 
   async findAll() {
-    return this.aplicacaoRepository.find({ relations: ['funcionario', 'insumo', 'insumo.lote'] });
+    return this.aplicacaoRepository.find({
+      relations: ['funcionario', 'insumo', 'insumo.lote'],
+    });
   }
 
   async findOne(id: number) {
@@ -36,9 +40,15 @@ export class AplicacaoInsumoService {
 
   async update(id: number, updateDto: UpdateAplicacaoInsumoDto) {
     await this.aplicacaoRepository.update(id, {
-      ...(updateDto.funcionarioId && { funcionario: { idFuncionario: updateDto.funcionarioId } as any }),
-      ...(updateDto.insumoId && { insumo: { idInsumo: updateDto.insumoId } as any }),
-      ...(updateDto.quantidade !== undefined && { quantidade: updateDto.quantidade }),
+      ...(updateDto.funcionarioId && {
+        funcionario: { id: updateDto.funcionarioId },
+      }),
+      ...(updateDto.insumoId && {
+        insumo: { idInsumo: updateDto.insumoId },
+      }),
+      ...(updateDto.quantidade !== undefined && {
+        quantidade: updateDto.quantidade,
+      }),
     });
     return this.findOne(id);
   }

@@ -1,4 +1,8 @@
-import { Injectable, ConflictException, UnauthorizedException } from '@nestjs/common';
+import {
+  Injectable,
+  ConflictException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
@@ -6,6 +10,7 @@ import { Usuario } from './entities/usuario.entity';
 import * as bcrypt from 'bcryptjs';
 import * as crypto from 'crypto';
 import { MailService } from '../mail/mail.service';
+import { Setor } from '../setor/entities/setor.entity';
 
 @Injectable()
 export class UsuarioService {
@@ -24,11 +29,16 @@ export class UsuarioService {
     });
 
     if (usuarioExistente) {
-      throw new ConflictException('E-mail ou código de usuário já registrados!');
+      throw new ConflictException(
+        'E-mail ou código de usuário já registrados!',
+      );
     }
 
     const saltRounds = 10;
-    const senhaCriptografada = await bcrypt.hash(createUsuarioDto.senha, saltRounds);
+    const senhaCriptografada = await bcrypt.hash(
+      createUsuarioDto.senha,
+      saltRounds,
+    );
 
     const tokenValidacao = crypto.randomBytes(32).toString('hex');
 
@@ -44,12 +54,16 @@ export class UsuarioService {
       statusValidacao: false,
       recoveryToken: tokenValidacao,
       tokenExpires: expiracao,
-      setor: { id: createUsuarioDto.id_setor } as any,
+      setor: { id: createUsuarioDto.id_setor } as unknown as Setor,
     });
 
     const usuarioSalvo = await this.usuarioRepository.save(novoUsuario);
 
-    this.mailService.enviarEmailConfirmacao(usuarioSalvo.email, usuarioSalvo.nomeUsuario, tokenValidacao);
+    void this.mailService.enviarEmailConfirmacao(
+      usuarioSalvo.email,
+      usuarioSalvo.nomeUsuario,
+      tokenValidacao,
+    );
 
     return {
       idUsuario: usuarioSalvo.idUsuario,
@@ -97,11 +111,15 @@ export class UsuarioService {
     });
 
     if (!usuario) {
-      throw new UnauthorizedException('Token de validação inválido ou inexistente!');
+      throw new UnauthorizedException(
+        'Token de validação inválido ou inexistente!',
+      );
     }
 
     if (usuario.tokenExpires && usuario.tokenExpires < new Date()) {
-      throw new UnauthorizedException('O token de validação expirou. Solicite um novo.');
+      throw new UnauthorizedException(
+        'O token de validação expirou. Solicite um novo.',
+      );
     }
 
     usuario.statusValidacao = true;

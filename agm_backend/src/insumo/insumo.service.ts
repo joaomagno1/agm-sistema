@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Insumo } from './entities/insumo.entity';
+import { LoteCultivo } from '../lote-cultivo/entities/lote-cultivo.entity';
 import { CreateInsumoDto } from './dto/create-insumo.dto';
 import { UpdateInsumoDto } from './dto/update-insumo.dto';
 
@@ -15,7 +16,7 @@ export class InsumoService {
   async create(createDto: CreateInsumoDto) {
     const insumo = this.insumoRepository.create({
       descricao: createDto.descricao,
-      lote: { idLote: createDto.loteId } as any,
+      lote: { idLote: createDto.loteId } as unknown as LoteCultivo,
     });
     return this.insumoRepository.save(insumo);
   }
@@ -36,7 +37,7 @@ export class InsumoService {
   async update(id: number, updateDto: UpdateInsumoDto) {
     await this.insumoRepository.update(id, {
       descricao: updateDto.descricao,
-      ...(updateDto.loteId && { lote: { idLote: updateDto.loteId } as any }),
+      ...(updateDto.loteId && { lote: { idLote: updateDto.loteId } }),
     });
     return this.findOne(id);
   }

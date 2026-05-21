@@ -4,6 +4,8 @@ import { Repository } from 'typeorm';
 import { AtribuicaoLote } from './entities/atribuicao-lote.entity';
 import { CreateAtribuicaoLoteDto } from './dto/create-atribuicao-lote.dto';
 import { UpdateAtribuicaoLoteDto } from './dto/update-atribuicao-lote.dto';
+import { Funcionario } from '../funcionario/entities/funcionario.entity';
+import { LoteCultivo } from '../lote-cultivo/entities/lote-cultivo.entity';
 
 @Injectable()
 export class AtribuicaoLoteService {
@@ -14,14 +16,16 @@ export class AtribuicaoLoteService {
 
   async create(createDto: CreateAtribuicaoLoteDto) {
     const atribuicao = this.atribuicaoRepository.create({
-      lote: { idLote: createDto.loteId } as any,
-      funcionario: { idFuncionario: createDto.funcionarioId } as any,
+      lote: { idLote: createDto.loteId } as unknown as LoteCultivo,
+      funcionario: { id: createDto.funcionarioId } as unknown as Funcionario,
     });
     return this.atribuicaoRepository.save(atribuicao);
   }
 
   async findAll() {
-    return this.atribuicaoRepository.find({ relations: ['lote', 'funcionario'] });
+    return this.atribuicaoRepository.find({
+      relations: ['lote', 'funcionario'],
+    });
   }
 
   async findOne(id: number) {
@@ -35,8 +39,10 @@ export class AtribuicaoLoteService {
 
   async update(id: number, updateDto: UpdateAtribuicaoLoteDto) {
     await this.atribuicaoRepository.update(id, {
-      ...(updateDto.loteId && { lote: { idLote: updateDto.loteId } as any }),
-      ...(updateDto.funcionarioId && { funcionario: { idFuncionario: updateDto.funcionarioId } as any }),
+      ...(updateDto.loteId && { lote: { idLote: updateDto.loteId } }),
+      ...(updateDto.funcionarioId && {
+        funcionario: { id: updateDto.funcionarioId },
+      }),
     });
     return this.findOne(id);
   }

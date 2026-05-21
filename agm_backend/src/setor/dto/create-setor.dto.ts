@@ -1,4 +1,4 @@
 export class CreateSetorDto {
-    codSetor: string;
-    nomeSetor: string;
-  }
+  codSetor: string;
+  nomeSetor: string;
+}

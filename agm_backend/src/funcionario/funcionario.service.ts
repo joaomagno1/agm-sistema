@@ -13,7 +13,8 @@ export class FuncionarioService {
   ) {}
 
   create(createFuncionarioDto: CreateFuncionarioDto) {
-    const novoFuncionario = this.funcionarioRepository.create(createFuncionarioDto);
+    const novoFuncionario =
+      this.funcionarioRepository.create(createFuncionarioDto);
     return this.funcionarioRepository.save(novoFuncionario);
   }
 
@@ -22,7 +23,10 @@ export class FuncionarioService {
   }
 
   findOne(id: number) {
-    return this.funcionarioRepository.findOne({ where: { id }, relations: ['usuario'] });
+    return this.funcionarioRepository.findOne({
+      where: { id },
+      relations: ['usuario'],
+    });
   }
 
   async update(id: number, updateFuncionarioDto: UpdateFuncionarioDto) {

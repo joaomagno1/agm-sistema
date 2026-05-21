@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { LoteCultivo } from './entities/lote-cultivo.entity';
+import { Gerente } from '../gerente/entities/gerente.entity';
 import { CreateLoteCultivoDto } from './dto/create-lote-cultivo.dto';
 import { UpdateLoteCultivoDto } from './dto/update-lote-cultivo.dto';
 
@@ -16,7 +17,7 @@ export class LoteCultivoService {
     const lote = this.loteRepository.create({
       periodo: createDto.periodo,
       nomeLote: createDto.nomeLote,
-      gerente: { idGerente: createDto.idGerente } as any,
+      gerente: { idGerente: createDto.idGerente } as unknown as Gerente,
     });
     return this.loteRepository.save(lote);
   }
@@ -38,7 +39,9 @@ export class LoteCultivoService {
     await this.loteRepository.update(id, {
       periodo: updateDto.periodo,
       nomeLote: updateDto.nomeLote,
-      ...(updateDto.idGerente && { gerente: { idGerente: updateDto.idGerente } as any }),
+      ...(updateDto.idGerente && {
+        gerente: { idGerente: updateDto.idGerente },
+      }),
     });
     return this.findOne(id);
   }

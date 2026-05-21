@@ -1,4 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  JoinColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import { Funcionario } from '../../funcionario/entities/funcionario.entity';
 import { Insumo } from '../../insumo/entities/insumo.entity';
 
@@ -15,7 +23,13 @@ export class AplicacaoInsumo {
   @JoinColumn({ name: 'INSUMO_ID' })
   insumo: Insumo;
 
-  @Column({ name: 'QUANTIDADE', type: 'decimal', precision: 10, scale: 2, nullable: true })
+  @Column({
+    name: 'QUANTIDADE',
+    type: 'decimal',
+    precision: 10,
+    scale: 2,
+    nullable: true,
+  })
   quantidade: number;
 
   @CreateDateColumn({ name: 'CREATED_AT' })

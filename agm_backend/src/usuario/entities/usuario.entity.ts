@@ -1,4 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  JoinColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import { Setor } from '../../setor/entities/setor.entity';
 
 @Entity('USUARIO')
@@ -27,10 +35,20 @@ export class Usuario {
   @Column({ name: 'STATUS_VALIDACAO', type: 'boolean', default: false })
   statusValidacao: boolean;
 
-  @Column({ name: 'RECOVERY_TOKEN', type: 'varchar', length: 255, nullable: true })
+  @Column({
+    name: 'RECOVERY_TOKEN',
+    type: 'varchar',
+    length: 255,
+    nullable: true,
+  })
   recoveryToken: string | null;
 
-  @Column({ name: 'REFRESH_TOKEN', type: 'varchar', length: 255, nullable: true })
+  @Column({
+    name: 'REFRESH_TOKEN',
+    type: 'varchar',
+    length: 255,
+    nullable: true,
+  })
   refreshToken: string | null;
 
   @Column({ name: 'TOKEN_EXPIRES', type: 'datetime', nullable: true })

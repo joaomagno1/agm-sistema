@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Query,
+} from '@nestjs/common';
 import { SetorService } from './setor.service';
 import { CreateSetorDto } from './dto/create-setor.dto';
 import { UpdateSetorDto } from './dto/update-setor.dto';

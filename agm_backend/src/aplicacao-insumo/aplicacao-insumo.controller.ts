@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Patch, Delete, Body, Param, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Patch,
+  Delete,
+  Body,
+  Param,
+  UseGuards,
+} from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { AplicacaoInsumoService } from './aplicacao-insumo.service';
 import { CreateAplicacaoInsumoDto } from './dto/create-aplicacao-insumo.dto';
@@ -6,7 +15,9 @@ import { UpdateAplicacaoInsumoDto } from './dto/update-aplicacao-insumo.dto';
 
 @Controller('aplicacao-insumo')
 export class AplicacaoInsumoController {
-  constructor(private readonly aplicacaoInsumoService: AplicacaoInsumoService) {}
+  constructor(
+    private readonly aplicacaoInsumoService: AplicacaoInsumoService,
+  ) {}
 
   @UseGuards(AuthGuard('jwt'))
   @Post()
